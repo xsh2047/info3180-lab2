@@ -7,6 +7,7 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for
+import time
 
 
 ###
@@ -35,6 +36,12 @@ def send_text_file(file_name):
     file_dot_text = file_name + '.txt'
     return app.send_static_file(file_dot_text)
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html', time= timeinfo())
+    
+def timeinfo():
+    return time.strftime("%c")
 
 @app.after_request
 def add_header(response):
